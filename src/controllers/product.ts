@@ -58,19 +58,19 @@ export const getAllCategories = TryCatch(async (req, res, next) => {
 // Revalidate on new Update or Delete Product & new Order
 //Get Admin Products Authenticated By Admin Only
 export const getAdminProducts = TryCatch(async (req, res, next) => {
-  let Products;
+  let products;
   if (myCache.has("all-products"))
-    Products = JSON.parse(myCache.get("all-products")!);
+    products = JSON.parse(myCache.get("all-products")!);
   else {
-    Products = await Product.find({});
-    myCache.set("all-products", JSON.stringify(Products));
+    products = await Product.find({});
+    myCache.set("all-products", JSON.stringify(products));
   }
 
-  Products = await Product.find({});
+  products = await Product.find({});
 
   res.status(201).json({
     success: true,
-    Products,
+    products,
   });
 });
 // Get Single Product Details
